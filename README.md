@@ -1,70 +1,219 @@
-# Getting Started with Create React App
+# React Js Notes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Using react with cdn
 
-## Available Scripts
+[React CDN Links](https://reactjs.org/docs/cdn-links.html)
 
-In the project directory, you can run:
+Copy paste the links to our html page.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Add Babel cdn link to our html page.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Babel is used to compiile our react application at runtime.
 
-### `npm test`
+[Babel CDN](https://babeljs.io/setup#installation)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Website</h1>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    <script type="text/babel">
+        Ban
+    </script>
+</body>
+</html>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Making React Component
 
-### `npm run eject`
+React component is a javascript function.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```html
+<script type="text/babel">
+    const Banner = () => {
+        return (
+            <div>
+                <p>Banner</p>
+            </div>
+        )
+    }
+</script>
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- function Banner is a react component.
+- template is created inside return function.
+- Here code inside the return() is JSX template. and not HTML template.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- In JSX v use className in pJSX allows to create html style templates, and in background Babel transpiles this jsx templates to html. and renders that html template to DOM.lace of class. while transpiling to html, it got converted to class.
 
-## Learn More
+- Next, we have to inject this template to html page by rendering it to DOM.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```html
+    <script type="text/babel">
+        const Banner = () => {
+            return (
+                <div>
+                    <p>Banner</p>
+                </div>
+            )
+        }
+    //  RENDER component to DOM 
+    ReactDOM.render(<Banner />, document.getElementById('banner'));
+    </script>
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ReactDOM - call render method - pass component and location we want to render the component.
 
-### Code Splitting
+```js
+ReactDOM.render(<Component name />, location_in_html_template);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## JSX and Templates
 
-### Analyzing the Bundle Size
+JSX allows to create html style templates, and in background Babel transpiles this jsx templates to html. and renders that html template to DOM.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Classes in JSX template
 
-### Making a Progressive Web App
+- classes are declared using className attribute.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```jsx
 
-### Advanced Configuration
+    return (
+        <div className="banner">
+            <p>Banner</p>
+        </div>
+    )
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+After template is transpiled to html, it got converted to class.
 
-### Deployment
+### Only one root element is allowed in JSX template.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```jsx
+return (
+    <div className="banner">
+        <p>Banner</p>
+    </div>
+    <div>
+        
+    </div>
+)
+```
 
-### `npm run build` fails to minify
+Here, we have two root divs which is not allowed
+New element is nested under root div.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Dynamic Values in Template
+
+Using curly braces to add dynamic values to the template.,
+
+```js
+const Banner = () => {
+    const title="my new website"
+    const subtitle = "hey look this is my website"
+    return (
+        <div className="banner">
+            <h2>{title.toUpperCase()}</h2>
+            <p>{subtitle}</p>
+            <p>Today's date is: {new Date().toDateString()} </p>
+            <p>Random Number: {Math.random()*100}</p>
+        </div>
+    )
+}
+```
+
+- using curly braces we can use variables inside template expression.
+- we can also inject variables to html attributes using curly braces.
+
+
+## Click Events & Event Handlers
+
+```js
+const Banner = () => {
+    const title = "welcome to my website"
+    const buttonClick = (e) => {
+        console.log('button click)
+        console.log(title);
+        console.log(e)
+    }
+    return (
+        <div className="banner">
+            <button onClick={buttonClick}>Click Me</button>
+        </div>
+    )
+}
+```
+- onClick event is a event handler.
+- Pass reference to function as an argument to onClick event.
+- When button is clicked function outside the template is called.
+- can get event object e.
+
+
+### Using inline functions
+
+```jsx
+return (
+    <div className="banner">
+        <button onClick={(e) => {
+            console.log(e)
+        }}>Click Me</button>
+    </div>
+)
+```
+
+- We defined a function inside the template.
+
+## Create a React Application
+
+- Install Nodejs
+- Go thru below link
+
+  [Creating an App](https://github.com/facebook/create-react-app)
+
+or run below command
+
+```terminal
+npx create-react-app my-app
+cd my-app
+npm run start
+```
+
+Check React Version
+
+```terminal
+npm view react version
+```
+
+## Making React Site
+
+**Note:**
+All codes are compiled to Jaascript for the browser to understand
+
+
+## Images in react
+
+1. we can store images in public folder
+
+    IF we we use this method, no need to dynamically load images.
+    Instead provide the path to the image.
+
+2. Also we can store images in src folder by creating a folder named assets.
+
+## Intro to State & useState
+
