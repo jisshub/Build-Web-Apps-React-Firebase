@@ -295,8 +295,7 @@ const Home = () => {
 
 ### UseState React Hook - Another Example
 
-- Not neccessary to provide state and usestate, we can give any value to assign useState hook.  
-- 
+- Not neccessary to provide state and usestate, we can give any value to assign **useState** hook.  
 
 ```js
 const [country, setcountry] = useState("ukraine");
@@ -312,5 +311,51 @@ return (
         <button onClick={handleCountry}>Click Me</button>
     </div>
 );
+```
+
+## Outputting List
+
+1. First create a state to store the list of items.
+
+```js
+const [events , setEvents] = useState([
+    {title: "React", date: "01.01.2020", id: 1},
+    {title: "Angular", date: "01.01.2020", id: 2},
+    {title: "Vue", date: "01.01.2020", id: 3},
+]);
+```
+
+2. We have to render this list in html template, for that purpose we use jaavscript
+map function to loop through each items in the list.
+
+
+3. **map** method called on events where we get access to each values in the list.
+Then using JSX template to display each one in the list. when we o/p a list in jsx template, root template must have a **key** property to keep track of each item when DOM outputs it. So if data changes at any point of time, react will keep track of it. **keys** are unique for each item.
+
+
+```js
+return (
+    <div className="App">
+      {events.map((event) => (
+          <div className='event-preview' key={event.id}>
+            <h2>{event.title}</h2>
+            <p>{event.date}</p>
+          </div>
+      ))}
+    </div>
+  );
+```
+
+- `event.id` refers to **key** property here. which is unique for each item. it can be any unique property not just **id**.
+
+- While applying **map** function on state, we also get an index of each item.
+
+```jsx
+{events.map((event, index) => (
+    <div className='event-preview' key={event.id}>
+        <h2>{index} - {event.title}</h2>
+        <p>{index} - {event.date}</p>
+    </div>
+))}
 ```
 
