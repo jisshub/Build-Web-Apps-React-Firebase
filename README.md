@@ -10,6 +10,23 @@
 
 [Click Events & Event Handlers](#Click-Event-&-Event-Handlers)
 
+[Using inline functions](#Using-inline-functions)
+
+[Create a React Application](#Create-a-React-Application)
+
+
+[Making React Site](#Making-React-Site)
+
+[Intro to State & useState](#Intro-to-State-&-useState)
+
+[State Implementation usig useState Hook](#State-Implementation-usig-useState-Hook)
+
+[Outputting List](#Outputting-List)
+
+[Using the Previous State](#using-the-previous-state)
+
+[Conditional Templates](#Conditional-Templates)
+
 
 # Using react with cdn
 
@@ -176,7 +193,7 @@ const Banner = () => {
 - can get event object e.
 
 
-### Using inline functions
+# Using inline functions
 
 ```jsx
 return (
@@ -190,7 +207,7 @@ return (
 
 - We defined a function inside the template.
 
-## Create a React Application
+# Create a React Application
 
 - Install Nodejs
 - Go thru below link
@@ -211,7 +228,7 @@ Check React Version
 npm view react version
 ```
 
-## Making React Site
+# Making React Site
 
 **Note:**
 All codes are compiled to Jaascript for the browser to understand
@@ -226,7 +243,7 @@ All codes are compiled to Jaascript for the browser to understand
 
 2. Also we can store images in src folder by creating a folder named assets.
 
-## Intro to State & useState
+# Intro to State & useState
 
 ### State and Why we need it.
 
@@ -247,7 +264,7 @@ State can be a toggle that sets to True or False on clicking the dropdown button
 ![](./IMAGES/state_1.png)
 
 
-## State Implementation usig useState Hook
+# State Implementation usig useState Hook
 
 ```js
 const Home = () => {
@@ -324,7 +341,7 @@ return (
 );
 ```
 
-## Outputting List
+# Outputting List
 
 1. First create a state to store the list of items.
 
@@ -370,7 +387,7 @@ return (
 ))}
 ```
 
-## Using the Previous State
+# Using the Previous State
 
 If we want to delete an event from the list, here is how we do it.
 
@@ -402,13 +419,13 @@ If we want to delete an event from the list, here is how we do it.
   }
 ```
 
-## Conditional Templates
+# Conditional Templates
 
 - **Conditional templates** are used to render a template based on the condition.
 - For example, if there is a boolean state, we can render a template based on the True or False value.
 
 
-### Implementation
+## Implementation
 
 - Define a state to store the boolean value.
 
@@ -423,7 +440,7 @@ const [showEvents, setShowEvents] = useState(true);
 <button onClick={() => setShowEvents(true)}>Show Events</button>
 ```
 
-### Conditionally ouput events from the list.
+## Conditionally ouput events from the list.
 
 ```jsx
 {showEvents && events.map((event, index) => (
@@ -440,7 +457,7 @@ const [showEvents, setShowEvents] = useState(true);
 - If not we can hide the events.
 
 
-### Conditionally ouput the button to show and hide the events.
+## Conditionally ouput the button to show and hide the events.
 
 ```jsx
 {
