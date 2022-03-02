@@ -1,17 +1,17 @@
 # React Js Notes
 
-[Using react with cdn](##Using-react-with-cdn) 
+[Using react with cdn](#Using-react-with-cdn) 
 
-[Making React Component](##Making-React-Component)
+[Making React Component](#Making-React-Component)
 
-[JSX and Templates](##JSX-and-Templates)
+[JSX and Templates](#JSX-and-Templates)
 
-[Dynamic Values in Templates](##Dynamic-Values-in-Templates)
+[Dynamic Values in Templates](#Dynamic-Values-in-Templates)
 
-[Click Events & Event Handlers](##Click-Event-&-Event-Handlers)
+[Click Events & Event Handlers](#Click-Event-&-Event-Handlers)
 
 
-## Using react with cdn
+# Using react with cdn
 
 [React CDN Links](https://reactjs.org/docs/cdn-links.html)
 
@@ -48,7 +48,7 @@ Babel is used to compiile our react application at runtime.
 </html>
 ```
 
-## Making React Component
+# Making React Component
 
 React component is a javascript function.
 
@@ -94,7 +94,7 @@ ReactDOM - call render method - pass component and location we want to render th
 ReactDOM.render(<Component name />, location_in_html_template);
 ```
 
-## JSX and Templates
+# JSX and Templates
 
 JSX allows to create html style templates, and in background Babel transpiles this jsx templates to html. and renders that html template to DOM.
 
@@ -130,7 +130,7 @@ Here, we have two root divs which is not allowed
 New element is nested under root div.
 
 
-## Dynamic Values in Template
+# Dynamic Values in Template
 
 Using curly braces to add dynamic values to the template.,
 
@@ -153,7 +153,7 @@ const Banner = () => {
 - we can also inject variables to html attributes using curly braces.
 
 
-## Click Events & Event Handlers
+# Click Events & Event Handlers
 
 ```js
 const Banner = () => {
