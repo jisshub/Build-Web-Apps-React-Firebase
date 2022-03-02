@@ -378,9 +378,73 @@ If we want to delete an event from the list, here is how we do it.
 - We put **handleClick** function as a callback since we are passing id argument to the same. If not, handleClick executes all time we load the page.
 - We capture the id of each event we want to delete.
 
-<!-- time: 3: 30 -->
- 
+
+### Delete the event from the list.
+
+```js
+  const handleClick = (id) => {
+    // filter method returns a new array with the items that match the condition
+    setEvents((prevEvents) => {
+        return prevEvents.filter((event) => event.id !== id);
+    }))
+    // when ids are same that id is filtered out.
+  }
+```
+
+## Conditional Templates
+
+- **Conditional templates** are used to render a template based on the condition.
+- For example, if there is a boolean state, we can render a template based on the True or False value.
 
 
+### Implementation
+
+- Define a state to store the boolean value.
+
+```js
+const [showEvents, setShowEvents] = useState(true);
+```
+
+- Invoke setShoeEvents function to change the value of showEvents on button click.
+
+```jsx
+<button onClick={() => setShowEvents(false)}>Hide Events</button>
+<button onClick={() => setShowEvents(true)}>Show Events</button>
+```
+
+### Conditionally ouput events from the list.
+
+```jsx
+{showEvents && events.map((event, index) => (
+    <div className='event-preview' key={event.id}>
+        <h2>{index} - {event.title}</h2>
+        <p>{index} - {event.date}</p>
+        <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+    </div>
+))}
+```
+
+- Here we pass showEvents state to jsx template as a javascript expresion.
+- If only both the values are true, then we can render the events.
+- If not we can hide the events.
 
 
+### Conditionally ouput the button to show and hide the events.
+
+```jsx
+{
+    showEvents && (
+        <div>
+        <button onClick={() => setShowEvents(false)}>Hide Events</button>
+        </div>
+    )
+}
+
+{
+    !showEvents && (
+        <div>
+        <button onClick={() => setShowEvents(true)}>Show Events</button>
+        </div>
+    )
+}
+```
