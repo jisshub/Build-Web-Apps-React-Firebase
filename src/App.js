@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [state, setState] = useState("mario");
+  const [country, setCountry] = useState("ukraine");
+  const handleClick = () => {
+    setState("luigi");
+    console.log(state);
+  }
+  const handleCountry = () => {
+    setCountry("russia");
+    console.log(country);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React & Firebase
-        </a>
-      </header>
+      <h1>{state}</h1>
+      <button onClick={handleClick}>Click me</button>
+      <h2>{country}</h2>
+      <button onClick={handleCountry}>Click Me</button>
     </div>
   );
 }

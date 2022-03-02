@@ -217,3 +217,100 @@ All codes are compiled to Jaascript for the browser to understand
 
 ## Intro to State & useState
 
+### State and Why we need it.
+
+- A state is a component data that change over time.
+- for example, consider a todolist application, where todo is a state.
+- todo changes overtime.
+- todo can be added, deleted, updated, etc.
+
+![](./IMAGES/todo.png)
+
+### Example - 2
+
+Consider a dropdown button, on click of the button, dropdown menu will appear.
+here we dont need a state to store the dropdown menu and its content.
+
+State can be a toggle that sets to True or False on clicking the dropdown button.
+
+![](./IMAGES/state_1.png)
+
+
+## State Implementation usig useState Hook
+
+```js
+const Home = () => {
+  let name = 'jissmon';
+  const handleClick = () => {
+    name = 'thala ajith';
+    console.log(name);
+  };
+  return (
+    <div className='home'>
+      <h2>HomePage</h2>
+      <p>{name}</p>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+};
+```
+
+- Here, the value of name in p tag wont change even we click the button.
+- So we use a hook called useState to change the value of name on button click.
+
+```js
+import { useState } from 'react';
+
+const Home = () => {
+  const [state, setstate] = useState('data science');
+  const handleClick = () => {
+    setstate('machine learning');
+    console.log(state);
+  };
+  return (
+    <div className='home'>
+      <h2>HomePage</h2>
+      <p>{state}</p>
+      <button onClick={handleClick}>Click Me</button>
+    </div>
+  );
+};
+```
+
+- First import **useState** hook from react.
+- Here we have used **useState** hook to change the value of state.
+- **useState** hook returns an array of two values.
+- We can capture those values using **array destructuring**.
+- First value is the current state.
+- Second value is a function that we can use to change the state.
+
+    ```js
+    const [state, setstate] = useState('data science');
+    ```
+
+- Define a function called **handleClick**.
+- Invoke **setstate** function and pass new value as an argument.
+- Initially value is set to 'data science'.
+- When we click the button, the value of state changes to 'machine learning'.
+
+### UseState React Hook - Another Example
+
+- Not neccessary to provide state and usestate, we can give any value to assign useState hook.  
+- 
+
+```js
+const [country, setcountry] = useState("ukraine");
+const handleCountry = () => {
+    setcountry("russia");
+    console.log(country);
+}
+return (
+    <div className="App">
+        <h1>{state}</h1>
+        <button onClick={handleClick}>Click me</button>
+        <h2>{country}</h2>
+        <button onClick={handleCountry}>Click Me</button>
+    </div>
+);
+```
+
