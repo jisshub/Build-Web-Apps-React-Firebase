@@ -1,5 +1,11 @@
 # React Js Notes
 
+[Using react with cdn](##Using-react-with-cdn) 
+[Making React Component](##Making-React-Component)
+[JSX and Templates](##JSX-and-Templates)
+[Dynamic Values in Templates](##Dynamic-Values-in-Templates)
+[Click Events & Event Handlers](##Click-Event-&-Event-Handlers)
+
 ## Using react with cdn
 
 [React CDN Links](https://reactjs.org/docs/cdn-links.html)
@@ -37,7 +43,7 @@ Babel is used to compiile our react application at runtime.
 </html>
 ```
 
-### Making React Component
+## Making React Component
 
 React component is a javascript function.
 
@@ -448,3 +454,10 @@ const [showEvents, setShowEvents] = useState(true);
     )
 }
 ```
+
+## useState hook limitations
+
+1. useState hook can only be called from top level of a function. We should not call it from inside of a function.
+
+2. Need to be used inside of a React component.
+
