@@ -1,10 +1,15 @@
 # React Js Notes
 
 [Using react with cdn](##Using-react-with-cdn) 
+
 [Making React Component](##Making-React-Component)
+
 [JSX and Templates](##JSX-and-Templates)
+
 [Dynamic Values in Templates](##Dynamic-Values-in-Templates)
+
 [Click Events & Event Handlers](##Click-Event-&-Event-Handlers)
+
 
 ## Using react with cdn
 
