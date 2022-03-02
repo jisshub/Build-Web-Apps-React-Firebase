@@ -359,3 +359,28 @@ return (
 ))}
 ```
 
+## Using the Previous State
+
+If we want to delete an event from the list, here is how we do it.
+
+```js
+{events.map((event, index) => (
+    <div className='event-preview' key={event.id}>
+        <h2>{index} - {event.title}</h2>
+        <p>{index} - {event.date}</p>
+        <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+    </div>
+))}
+```
+
+- We pass the reference to **handleClick** function in **onClick** event of the button.
+- We have to pass the id of the event to be deleted as an argument to **handleClick** function.
+- We put **handleClick** function as a callback since we are passing id argument to the same. If not, handleClick executes all time we load the page.
+- We capture the id of each event we want to delete.
+
+<!-- time: 3: 30 -->
+ 
+
+
+
+
