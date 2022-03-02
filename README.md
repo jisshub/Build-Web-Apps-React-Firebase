@@ -518,7 +518,7 @@ export default function Title() {
 
 - Add some styling to the Title component.
 
-<!-- time - 2:10 -->
+#### time - 2:10 
 
 Class Link: https://www.udemy.com/course/build-web-apps-with-react-firebase/learn/lecture/29054788#content
 
