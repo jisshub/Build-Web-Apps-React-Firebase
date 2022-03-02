@@ -483,3 +483,40 @@ const [showEvents, setShowEvents] = useState(true);
 
 2. Need to be used inside of a React component.
 
+
+# Using multiple components
+
+![](./IMAGES/image_3.png)
+
+# Creating a Title Component
+
+- Create a Title component in components folder.
+
+**components/Title.js**
+
+```js
+export default function Title() {
+    return (
+        <div>
+            <h1>Mario Kingdom Events</h1>
+            <h2>All the latest events in mario kingdom</h2>
+        </div>
+    )
+}
+```
+
+- Inject **Title** component into the App component.
+
+**App.js**
+
+```js
+<div className="App">
+    <Title />
+```
+
+- Once Title component is injected, all the contents of the Title component will be rendered in the App component.
+
+- Add some styling to the Title component.
+
+<!-- time - 2:10 -->
+
