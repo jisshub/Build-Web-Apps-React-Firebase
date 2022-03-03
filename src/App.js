@@ -13,7 +13,7 @@ function App() {
   ]);
 
   const [showEvents, setShowEvents] = useState(true);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   console.log(showModal);
 
@@ -60,6 +60,9 @@ function App() {
         <h2>10% Off Coupon Code!!</h2>
         <p>Use the code NINJA10 at the checkout</p>
       </Modal> */}
+      <div>
+        <button onClick={()=>setShowModal(true)}>Show Modal</button>
+      </div>
       {showModal && (<Modal handleShowModal={handleShowModal}>
         <h2>Terms and Condition!!</h2>
         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>

@@ -830,3 +830,53 @@ When we click the button, it fires the function we passed as a prop, which in tu
 </Modal>)}
 ```
 
+# Challenge - Showing the Modal
+
+1. Modal should not show on page by default.
+2. When we click the button, modal should show.
+
+
+```jsx
+const [showModal, setShowModal] = useState(false);
+
+{!showModal && (
+    <div>
+        <button onClick={()=>setShowModal(true)}>Show Modal</button>
+    </div>
+)}
+```
+
+- First set showModal state to false.
+- Second set the condition to show the modal on button click.
+
+# Portals
+
+- Portals in react means take a component and render it somewhere else in the DOM.
+- Ie. We take a component and render it somewhere else in the DOM.
+
+For example: We can pick **Modal** component and dump it sowhere else in the DOM.
+
+- We use **ReactDOM.portal()** to achieve this.
+- ReactDOM.portal() takes 2 arguments.
+    1. Component Template
+    2. Location we wish to render that template.
+
+```jsx
+return (ReactDOM.createPortal((
+    <div>
+      <div className="modal-backdrop">
+          <div className="modal">
+              {children}
+            <button onClick={handleShowModal}>Close</button>
+          </div>
+      </div>
+    </div>
+  ), document.body))
+}
+```
+
+- We render this Modal template at the end of the body tag.
+
+![](./IMAGES/image_10.png)
+
+- We can see modal component is placed at end of body tag.
