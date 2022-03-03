@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import Title from './components/Title';
-import Computer from './components/Computer';
 import Modal from './components/Modal';
+import EventList from './components/EventList';
 
 function App() {
   const [events , setEvents] = useState([
@@ -49,17 +48,7 @@ function App() {
           )
         }
         
-      {showEvents && events.map((event, index) => (
-        <React.Fragment key={event.id}>
-          <h2>{index} - {event.title}</h2>
-          <p>{index} - {event.date}</p>
-          <button onClick={() => handleClick(event.id)}>Delete Event</button> 
-        </React.Fragment>
-      ))}
-      {/* <Modal>
-        <h2>10% Off Coupon Code!!</h2>
-        <p>Use the code NINJA10 at the checkout</p>
-      </Modal> */}
+      {showEvents && <EventList events={events} handleClick={handleClick} />}
       <div>
         <button onClick={()=>setShowModal(true)}>Show Modal</button>
       </div>

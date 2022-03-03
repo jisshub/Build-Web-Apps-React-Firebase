@@ -880,3 +880,83 @@ return (ReactDOM.createPortal((
 ![](./IMAGES/image_10.png)
 
 - We can see modal component is placed at end of body tag.
+
+# Challenge - Reusable Event List Component
+
+**Question**:
+
+1. Create a new EventList component with component functions and new templates.
+2. Use the EventList component to render the list of events.
+3. Nest EventList component in App component.
+
+## Step 1: Create a new EventList component and add template.
+
+**components/EventList.js**
+
+**EventList.js**
+
+```jsx
+export default function EventList() {
+  return (
+    <div>
+        <h1>Event List</h1>
+        {
+            events.map((event, index) => (
+                <React.Fragment key={event.id}>
+                  <h2>{index} - {event.title}</h2>
+                  <p>{index} - {event.date}</p>
+                  <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+                </React.Fragment>
+              ))
+        }
+    </div>
+  )
+}
+```
+
+## Step 2: Render EventList in App component.
+
+**App.js**
+
+```jsx
+{showEvents && <EventList />}
+```
+
+## Step 3: Pass events state as a Prop to EventList component.
+
+**App.js**
+
+```jsx
+{showEvents && <EventList events={events}/>}
+```
+
+## Step 4: Accept the Prop events by destructuring it in EventList component
+
+**EventList.js**
+
+```jsx
+export default function EventList({events}){
+
+}
+```
+
+## Step 6: Pass handleClick function as another Prop to EventList component
+
+**App.js**
+
+```jsx
+{showEvents && <EventList events={events} handleClick={handleClick} />}
+
+```
+
+## Step 7: Accept the Prop handleClick by destructuring it in EventList component
+
+**EventList.js**
+
+```jsx
+export default function EventList({events, handleClick}){
+
+}
+```
+
+This way we can reuse the components as well.
