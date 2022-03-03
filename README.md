@@ -27,6 +27,28 @@
 
 [Conditional Templates](#Conditional-Templates)
 
+[Using Multiple Components](#Using-Multiple-Components)
+
+[Creating a Title Component](#Creating-a-Title-Component)
+
+[Props](#Props)
+
+[Using React Fragments](#Using-React-Fragments)
+
+[Creating React Fragment using React.Fragment keyword](#Creating-React-Fragment-using-React.Fragment-keyword)
+
+[Children Prop (Making a Modal Component)](#Children-Prop-(Making-a-Modal-Component))
+
+[Reusing Modal Component](#Reusing-Modal-Component)
+
+[Function as Props](#Function-as-Props)
+
+[Challenge - Showing the Modal](#challenge---showing-the-modal)
+
+[Portals](#Portals)
+
+[Challenge - Reusable Event List Component](#challenge---reusable-event-list-component)
+
 
 # Using react with cdn
 
@@ -484,7 +506,7 @@ const [showEvents, setShowEvents] = useState(true);
 2. Need to be used inside of a React component.
 
 
-# Using multiple components
+# Using Multiple Components
 
 ![](./IMAGES/image_3.png)
 
@@ -960,3 +982,6 @@ export default function EventList({events, handleClick}){
 ```
 
 This way we can reuse the components as well.
+
+**Next Content**: https://www.udemy.com/course/build-web-apps-with-react-firebase/learn/lecture/29054918#overview
+
