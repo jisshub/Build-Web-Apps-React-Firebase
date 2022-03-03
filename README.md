@@ -518,7 +518,315 @@ export default function Title() {
 
 - Add some styling to the Title component.
 
-#### time - 2:10 
+**index.css**
 
-Class Link: https://www.udemy.com/course/build-web-apps-with-react-firebase/learn/lecture/29054788#content
+```css
+.title {
+  display: inline-block;
+  padding: 30px 60px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  display: inline-block;
+  color: #555;
+  font-weight: normal;
+  padding-bottom: 20px;
+  border-bottom: 1px solid f4f4f4;
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
+```
+
+# Props
+
+Props are properties that are passed from parent component to child component.
+
+**App.js**
+
+- We can pass props to child component.
+- We pass **title** and **subtitle** props to the child component.
+- We can pass multiple props to the child component.
+
+```js
+<Title title="Mario Kingdom Events" subtitle="All the latest events in mario kingdom"/>
+```
+
+**Title.js**
+
+- We pass props paramter to Title function.
+- Access the **title** and **subtitle** props in jsx template.
+
+```js
+export default function Title(props) {
+    return (
+        <div>
+            <h1 className="title">{props.title}</h1>
+            <h2 className="subtitle">{props.subtitle}</h2>
+        </div>
+    )
+}
+```
+
+### Destructuring props in jsx template.
+
+```js
+export default function Title({title, subtitle}) {
+    return (
+        <div>
+            <h1 className="title">{title}</h1>
+            <h2 className="subtitle">{subtitle}</h2>
+        </div>
+    )
+}
+```
+
+### Reusing Title Component with different props value
+
+```jsx
+<Title title="Mario Kingdom Events" subtitle="All the latest events in mario kingdom"/>
+<Title title="Jurassic Park" subtitle="All the latest events in jurassic park"/>
+```
+
+# Using React Fragments
+
+- React fragments are empty tags.
+- React fragments are used to wrap elements in jsx template.
+
+```js
+<>
+    <h1 className="title">{title}</h1>
+    <br>
+    <h2 className="subtitle">{subtitle}</h2>
+</>
+```
+
+- When we ouput this in DOM, it doesnt output elements in place of empty tags.
+- But things inside empty tags are rendered.
+
+[](./IMAGES/image_5.png)
+
+- We can see in the image that title component is not wrapped by parent element since
+we use react fragments there.
+
+# Creating React Fragment using React.Fragment keyword
+
+- We cant use react fragments with props by using empty tags.
+- Instead We use **React.Fragment** to wrap the elements.
+
+```jsx
+<key={event.id}>
+    <h2>{index} - {event.title}</h2>
+    <p>{index} - {event.date}</p>
+    <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+</>
+```
+
+- Here we use key property to identify the event.
+- So we cant put empty tag there.
+- But We can use React.Fragment to wrap the elements.
+
+```jsx
+<React.Fragment key={event.id}>
+    <h2>{index} - {event.title}</h2>
+    <p>{index} - {event.date}</p>
+    <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+</React.Fragment>
+```
+
+- This is the longer way to create a React Fragment.
+- Advantage is we can have props on the fragment.
+- When we output this on DOM, there will be just inner contents of the fragment.
+- **React Fragments** are used if we dont want to show the parent element aroung the contents.
+
+# Children Prop (Making a Modal Component)
+
+- Another method of passing inforamtions from parent to child component is by using *children prop*.
+
+,
+## Creating a Modal Component
+
+- To create a fucntional component, type **rfc** and press enter.
+- It will create react fucntional component if react snippets are insatlled.
+
+**components/Modal.js**
+
+```js
+export default function Modal() {
+  return (
+    <div>
+      <div className="modal-backdrop">
+          <div className="modal">
+              <h2>10% Off Coupon Code!!</h2>
+              <p>Use the code NINJA10 at the checkout</p>
+          </div>
+      </div>
+    </div>
+  )
+}
+```
+- Import the Modal component into the App component.
+
+**components/App.js**
+
+```js
+<Modal />
+```
+
+- Apply Styling to Modal Component
+
+**components/Modal.css**
+
+```css
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+.modal {
+    padding: 30px;
+    max-width: 480px;
+    margin: 200px auto;
+    background: #fff;
+    border-radius: 10px;
+}
+```
+
+- Import Modal.css into Modal component.
+
+```js
+import '../components/Modal.css';
+```
+
+# Reusing Modal Component
+
+**Scenario:** 
+- We have to show different modal contents each time.
+
+- We do this by using **Children Prop**.
+
+**App.js**
+
+- Pass contents of Modal component to the Modal component in App.js
+
+```jsx
+<Modal>
+    <h2>10% Off Coupon Code!!</h2>
+    <p>Use the code NINJA10 at the checkout</p>
+</Modal>
+```
+
+- Add **Children Prop** to Modal component as argument.
+- Use **Children Prop** to render the contents of Modal component.
+
+```jsx
+export default function Modal({children}) {
+  return (
+    <div>
+      <div className="modal-backdrop">
+          <div className="modal">
+              {children}
+          </div>
+      </div>
+    </div>
+  )
+}
+```
+
+- We can reuse the modal contents. This way we can show different modal 
+contents each time.
+
+```jsx
+ <Modal>
+    <h2>10% Off Coupon Code!!</h2>
+    <p>Use the code NINJA10 at the checkout</p>
+</Modal>
+<Modal>
+    <h2>Terms and Condition!!</h2>
+    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+</Modal>
+```
+
+# Function as Props
+
+## Task - Hide the modal based on button click.
+
+### Step 1: Create a State 
+
+**App.js**
+
+```jsx
+const [showModal, setShowModal] = useState(true);
+```
+
+### Step 2: Create a function to hide the modal.
+
+**App.js**
+
+```jsx
+  const handleShowModal = () => {
+    setShowModal(false);
+  }
+```
+
+### Step 3: Pass the function as a prop to the Modal Component.
+
+- Prop is **handleShowModal**
+
+**App.js**
+
+```jsx
+<Modal handleShowModal={handleShowModal}>
+    <h2>Terms and Condition!!</h2>
+    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+</Modal>
+```
+
+### Step 4: Accept the Prop by destructuring it in Modal.js.
+
+**Modal.js**
+
+```js
+export default function Modal({children, handleShowModal}) {
+```
+
+### Step 5: Attach an onClick Event and Set Reference to the Prop we accepeted.
+
+```js
+  return (
+    <div>
+      <div className="modal-backdrop">
+          <div className="modal">
+              {children}
+            <button onClick={handleShowModal}>Close</button>
+          </div>
+      </div>
+    </div>
+  )
+}
+```
+
+When we click the button, it fires the function we passed as a prop, which in turn changes the value of the state *showModal*. I.e. if *showModal* value is true as default, on clicking the button it changes to True.
+
+
+### Step 6: Hide the modal on button click
+
+- We put the modal in curly braces and set the condition  along with **showModal**.
+- If **showModal** is true, we render the modal.
+- If **showModal** is false, we dont render the modal.
+- On Clicking the button, we change the value of **showModal** to false.
+
+```jsx
+{showModal && (<Modal handleShowModal={handleShowModal}>
+    <h2>Terms and Condition!!</h2>
+    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+</Modal>)}
+```
 

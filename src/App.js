@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Title from './components/Title';
+import Computer from './components/Computer';
+import Modal from './components/Modal';
 
 function App() {
   const [events , setEvents] = useState([
@@ -11,6 +13,13 @@ function App() {
   ]);
 
   const [showEvents, setShowEvents] = useState(true);
+  const [showModal, setShowModal] = useState(true);
+
+  console.log(showModal);
+
+  const handleShowModal = () => {
+    setShowModal(false);
+  }
 
   const handleClick = (id) => {
     // filter method returns a new array with the items that match the condition
@@ -21,7 +30,9 @@ function App() {
 
   return (
     <div className="App">
-      <Title />
+      <Title title="Mario Kingdom Events" subtitle="All the latest events in mario kingdom"/>
+      <Title title="Jurassic Park" subtitle="All the latest events in jurassic park"/>
+
         {
         showEvents && (
           <div>
@@ -39,12 +50,20 @@ function App() {
         }
         
       {showEvents && events.map((event, index) => (
-        <div className='event-preview' key={event.id}>
+        <React.Fragment key={event.id}>
           <h2>{index} - {event.title}</h2>
           <p>{index} - {event.date}</p>
           <button onClick={() => handleClick(event.id)}>Delete Event</button> 
-        </div>
+        </React.Fragment>
       ))}
+      {/* <Modal>
+        <h2>10% Off Coupon Code!!</h2>
+        <p>Use the code NINJA10 at the checkout</p>
+      </Modal> */}
+      {showModal && (<Modal handleShowModal={handleShowModal}>
+        <h2>Terms and Condition!!</h2>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+      </Modal>)}
     </div>
     )
   }

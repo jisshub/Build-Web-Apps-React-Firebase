@@ -1,8 +1,8 @@
-export default function Title() {
+export default function Title({title, subtitle}) {
     return (
-        <div>
-            <h1 className="title">Mario Kingdom Events</h1>
-            <h2 className="subtitle">All the latest events in mario kingdom</h2>
-        </div>
+        <>
+            <h1 className="title">{title}</h1>
+            <h2 className="subtitle">{subtitle}</h2>
+        </>
     )
 }
