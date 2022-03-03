@@ -35,7 +35,7 @@
 
 [Using React Fragments](#Using-React-Fragments)
 
-[Creating React Fragment using React.Fragment keyword](#Creating-React-Fragment-using-React.Fragment-keyword)
+[Creating React Fragment using React.Fragment keyword](#creating-react-fragment-using-reactfragment-keyword)
 
 [Children Prop (Making a Modal Component)](#Children-Prop-(Making-a-Modal-Component))
 
