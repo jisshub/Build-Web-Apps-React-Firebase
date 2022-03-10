@@ -985,3 +985,115 @@ This way we can reuse the components as well.
 
 **Next Content**: https://www.udemy.com/course/build-web-apps-with-react-firebase/learn/lecture/29054918#overview
 
+# using global stylesheets
+
+**index.css**
+
+```css
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p, h1, h2 {
+  color: #555;
+}
+
+button {
+  background: #ff4500;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.title {
+  display: inline-block;
+  padding: 30px 60px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  display: inline-block;
+  color: #555;
+  font-weight: normal;
+  padding-bottom: 20px;
+  border-bottom: 1px solid f4f4f4;
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
+```
+
+# components stylesheets
+
+- Stylesheets that are specific to a component.
+- Component specific stylesheets are also global.
+- Component css files are not just scoped to that current component.
+
+**Modal Component Stylesheet**
+
+```css
+.modal h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+```
+
+- Here this style is only scoped to the h2 inside the modal component because we use className modal.
+
+### Styling Specific to Title Component
+
+**Title.js**
+
+```js
+import './Title.css';
+
+export default function Title({title, subtitle}) {
+    return (
+        <div className='title-block'>
+            <h1 className="title">{title}</h1>
+            <h2 className="subtitle">{subtitle}</h2>
+        </div>
+    )
+}
+```
+
+**Title.css**
+
+```css
+.title-block .title {
+    display: inline-block;
+    padding: 30px 60px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+  
+.title-block .subtitle {
+    display: inline-block;
+    color: #555;
+    font-weight: normal;
+    padding-bottom: 20px;
+    border-bottom: 1px solid f4f4f4;
+    margin-top: 10px;
+    margin-bottom: 60px;
+  }
+```
+
+- We have to use the className **title-block** to put style specific to the **Title** component.
+
