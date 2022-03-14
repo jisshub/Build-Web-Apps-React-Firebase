@@ -1168,7 +1168,7 @@ className={isShowModal ? "sales-btn":""}>
 
 1. Create a module.css file and add the css styles.
 
-**EventList.css**
+**EventList.module.css**
 ```css
 .card { 
     border: 1px solid #eee;
@@ -1200,6 +1200,8 @@ import styles from "./EventList.module.css"
 ## Using an element selector
 
 We add an element selector for button element.
+
+**EventList.module.css**
 
 ```css
 .card button {
