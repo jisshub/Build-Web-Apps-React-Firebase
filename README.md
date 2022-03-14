@@ -1159,3 +1159,55 @@ className={isShowModal ? "sales-btn":""}>
     text-transform: uppercase;
 }
 ```
+
+# CSS Modules
+
+- CSS Modules are scoped to the components we use.
+
+## Adding a Class Selector
+
+1. Create a module.css file and add the css styles.
+
+**EventList.css**
+```css
+.card { 
+    border: 1px solid #eee;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, .05);
+    padding: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 4px;
+}
+```
+
+2. Next import the module in the Eventlist component.
+
+**EventList.js**
+
+```js
+import styles from "./EventList.module.css"
+
+<div className={styles.card} key={event.id}>
+  <h2>{index} - {event.title}</h2>
+  <p>{index} - {event.date}</p>
+  <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+</div>
+```
+
+- Here we use **styles.card** css module to style the div element.
+- card is the class selector here.
+
+## Using an element selector
+
+We add an element selector for button element.
+
+```css
+.card button {
+    background-color: #555;
+}
+```
+
+This will style the button element of the EventList component.
+
+
+# Forms and Labels in React
