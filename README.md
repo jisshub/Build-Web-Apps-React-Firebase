@@ -14,7 +14,6 @@
 
 [Create a React Application](#Create-a-React-Application)
 
-
 [Making React Site](#Making-React-Site)
 
 [Intro to State & useState](#Intro-to-State-&-useState)
@@ -48,6 +47,20 @@
 [Portals](#Portals)
 
 [Challenge - Reusable Event List Component](#challenge---reusable-event-list-component)
+
+[Using Global Stylesheets](#Using-Global-Stylesheets)
+
+[Components Stylesheets](#Components-Stylesheets)
+
+[Inline Stylesheet](#Inline-Stylesheet)
+
+[Dynamic Inline Styles](#Dynamic-Inline-Styles)
+
+[Conditional CSS Class](#Conditional-CSS-Class)
+
+[CSS Modules](#CSS-Modules)
+
+[Forms and Labels in React](#Forms-and-Labels-in-React)
 
 
 # Using react with cdn
@@ -985,7 +998,7 @@ This way we can reuse the components as well.
 
 **Next Content**: https://www.udemy.com/course/build-web-apps-with-react-firebase/learn/lecture/29054918#overview
 
-# using global stylesheets
+# Using Global Stylesheets
 
 **index.css**
 
@@ -1038,7 +1051,7 @@ button {
 }
 ```
 
-# components stylesheets
+# Components Stylesheets
 
 - Stylesheets that are specific to a component.
 - Component specific stylesheets are also global.
@@ -1137,7 +1150,7 @@ style={{
 }}>
 ```
 
-# Conditional CSS class
+# Conditional CSS Class
 
 Adding css classes to an element based on a condition.
 
