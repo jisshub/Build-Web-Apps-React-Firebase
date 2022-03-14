@@ -1097,3 +1097,65 @@ export default function Title({title, subtitle}) {
 
 - We have to use the className **title-block** to put style specific to the **Title** component.
 
+
+# Inline Stylesheet
+
+Add a style property, and pass in an object with key value pairs.
+where key is the css property and value is the value of the property.
+
+```js
+<div className="modal" 
+  style={{
+    border: "4px solid black",
+    borderColor: "#ff4500",
+    textAlign: "center",
+  }}>
+    {children}
+  <button onClick={handleShowModal}>Close</button>
+</div>
+```
+
+# Dynamic Inline Styles
+
+- Dynamically update the css style of an element.
+- Here we update **borderColor** property of the element based on **isShowModal**. 
+
+
+**App.js**
+
+```js
+{showModal && (<Modal handleShowModal={handleShowModal} isShowModal={true}>
+```
+
+**Modal.js**
+```js
+<div className="modal" 
+style={{
+  border: "4px solid black",
+  borderColor: isShowModal ? "#ff4500" : "#555",
+  textAlign: "center",
+}}>
+```
+
+# Conditional CSS class
+
+Adding css classes to an element based on a condition.
+
+**Modal.js**
+
+```js
+<button onClick={handleShowModal}
+className={isShowModal ? "sales-btn":""}>
+```
+
+- Here, if **isShowModal** is true then we add **sales-btn** css class to the button. Else no css class is added.
+
+**Modal.css**
+
+```css
+.modal .sales-btn {
+    border: 4px solid #333;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+```

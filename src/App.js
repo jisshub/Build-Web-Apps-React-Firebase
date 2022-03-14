@@ -52,7 +52,7 @@ function App() {
       <div>
         <button onClick={()=>setShowModal(true)}>Show Modal</button>
       </div>
-      {showModal && (<Modal handleShowModal={handleShowModal}>
+      {showModal && (<Modal handleShowModal={handleShowModal} isShowModal={true}>
         <h2>Terms and Condition!!</h2>
         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
       </Modal>)}
