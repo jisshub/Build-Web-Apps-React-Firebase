@@ -6,16 +6,15 @@ import EventList from './components/EventList';
 import NewEventForm from './components/NewEventForm';
 
 function App() {
-  const [events , setEvents] = useState([
-    {title: "React", date: "01.01.2020", id: 1},
-    {title: "Angular", date: "01.01.2020", id: 2},
-    {title: "Vue", date: "01.01.2020", id: 3},
-  ]);
-
+  const [events , setEvents] = useState([]);
   const [showEvents, setShowEvents] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
-  console.log(showModal);
+  const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event];
+    });
+  }
 
   const handleShowModal = () => {
     setShowModal(false);

@@ -1382,5 +1382,14 @@ return (
 )
 ```
 
+[](./IMAGES/image_13.png)
+
 # Adding Events to EventList
 
+```js
+const addEvent = (event) => {
+  setEvents((prevEvents) => {
+    return [...prevEvents, event];
+  });
+}
+```
