@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Title from './components/Title';
 import Modal from './components/Modal';
 import EventList from './components/EventList';
+import NewEventForm from './components/NewEventForm';
 
 function App() {
   const [events , setEvents] = useState([
@@ -53,8 +54,7 @@ function App() {
         <button onClick={()=>setShowModal(true)}>Show Modal</button>
       </div>
       {showModal && (<Modal handleShowModal={handleShowModal} isShowModal={true}>
-        <h2>Terms and Condition!!</h2>
-        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+        <NewEventForm />
       </Modal>)}
     </div>
     )

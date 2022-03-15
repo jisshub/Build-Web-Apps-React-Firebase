@@ -1224,5 +1224,131 @@ We add an element selector for button element.
 
 This will style the button element of the EventList component.
 
-
 # Forms and Labels in React
+
+- Create a new form component to handle the form submission.
+
+**NewEventForm.jss**
+
+```js
+export default function NewEventForm() {
+  return (
+    <form>
+      <label>
+          <span>Event Title: </span>
+          <input type="text" />
+      </label>
+      <label>
+          <span>Event Date: </span>
+          <input type="text" />
+      </label>
+      <button>Submit</button>
+    </form>
+  )
+}
+```
+
+**NewEventForm.css**
+
+```css
+.new-event-form label,
+.new-event-form input {
+    display: block;
+    margin: 10px auto;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 1.2rem;    
+}
+```
+
+- Import **NewEventForm** in the App.js file.
+
+**App.js**
+
+```js
+import NewEventForm from './components/NewEventForm';
+
+{showModal && (<Modal handleShowModal={handleShowModal} isShowModal={true}>
+      <NewEventForm />
+</Modal>
+)}
+```
+
+[](./IMAGES/image_11.png)
+
+# onChange Event
+
+**EventList.js**
+
+- Use onChange event listener on input field and udpate the state.
+- Below we update the state with the value of the input field.
+- When input value changes, it updates the state.
+
+```js
+export default function NewEventForm() {
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+
+  return (
+    <form className='new-event-form'>
+      <label>
+          <span>Event Title: </span>
+          <input type="text" onChange={(e) => setTitle(e.target.value)}/>
+      </label>
+      <label>
+          <span>Event Date: </span>
+          <input type="date" onChange={(e) => setDate(e.target.value)}/>
+      </label>
+      <p>Title - {title}, Date - {date}</p>
+      <button>Submit</button>
+    </form>
+  )
+}
+```
+
+# Controlled Inputs and Reseting Forms
+
+- Controlling the input from outside the element.
+- Lets say, we want to clear the input values of form 
+on clicking the button or a message box.
+- For this, we add a **value** attribute to the input field.
+- And set the **value** attribute with **state**.
+
+### Steps: 
+1. Create a **resetForm** function to clear the input values.
+2. Call **setTitle** and **setDate** function with empty string.
+3. Add value attribute to each inputs.
+4. Set state to value attributes.
+5. Add **onClick** listener and call the ***resetForm*** function.
+
+```js
+const resetForm = () => {
+    setTitle('');
+    setDate('');
+  }
+  return (
+    <form className='new-event-form'>
+      <label>
+          <span>Event Title: </span>
+          <input 
+            type="text" 
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            />
+      </label>
+      <label>
+          <span>Event Date: </span>
+          <input 
+            type="date" 
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+            />
+      </label>
+      <p>Title - {title}, Date - {date}</p>
+      <button>Submit</button>
+      <p onClick={resetForm}>Reset the form</p>
+    </form>
+  )
+```
