@@ -1352,3 +1352,35 @@ const resetForm = () => {
     </form>
   )
 ```
+
+# Submitting the Forms using onSubmit
+
+- When we click on button to submit the form.
+- It fires the **handleSubmit** function.
+- In **handleSubmit** function,
+
+  1. We prevent the default behaviour of the form by calling **e.preventDefault()**.
+  2. We store the title, date and id objects in **event** variable.
+  3. We reset the form by calling **resetForm** function.
+
+```js
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const event = {
+      title: title,
+      date: date,
+      id: Math.floor(Math.random() * 1000)
+    }
+    console.log(event);
+    resetForm();
+  }
+
+return (
+  <form className='new-event-form' onSubmit={handleSubmit}>
+    <button>Submit</button>
+  </form>
+)
+```
+
+# Adding Events to EventList
+
