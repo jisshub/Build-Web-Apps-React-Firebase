@@ -14,12 +14,8 @@ function App() {
     setEvents((prevEvents) => {
       return [...prevEvents, event];
     });
-  }
-
-  const handleShowModal = () => {
     setShowModal(false);
   }
-
   const handleClick = (id) => {
     // filter method returns a new array with the items that match the condition
    setEvents((prevEvents) => {
@@ -52,8 +48,8 @@ function App() {
       <div>
         <button onClick={()=>setShowModal(true)}>Show Modal</button>
       </div>
-      {showModal && (<Modal handleShowModal={handleShowModal} isShowModal={true}>
-        <NewEventForm />
+      {showModal && (<Modal isShowModal={true}>
+        <NewEventForm addEvent={addEvent}/>
       </Modal>)}
     </div>
     )

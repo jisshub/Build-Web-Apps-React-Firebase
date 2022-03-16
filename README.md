@@ -1386,10 +1386,104 @@ return (
 
 # Adding Events to EventList
 
+1. It take the current events and it spreads those events into the new array and adds the the new one as well.
+
+**App.js**
+
 ```js
 const addEvent = (event) => {
   setEvents((prevEvents) => {
     return [...prevEvents, event];
   });
 }
+```
+
+2. Pass this **addEvent** to **NewEventForm** as a **prop**.
+
+**NewEventForm.js**
+
+```js
+<NewEventForm addEvent={addEvent}/>
+```
+
+3. Destructure the prop **addEvent** and call it in **handleSubmit** function.
+
+**NewEventForm.js**
+
+```js
+export default function NewEventForm({addEvent}) { 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const event = {
+      title: title,
+      date: date,
+      id: Math.floor(Math.random() * 1000)
+    }
+    addEvent(event);
+    resetForm();
+  }
+}
+```
+
+1. We submit the form.
+2. It fires the **preventDefault** function.
+3. Create an event object.
+4. Pass event object to **addEvent** function.
+5. Reset the form.
+
+**NewEventForm.js**
+
+```js
+export default function NewEventForm({addEvent}) {
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
+
+  const resetForm = () => {
+    setTitle('');
+    setDate('');
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const event = {
+      title: title,
+      date: date,
+      id: Math.floor(Math.random() * 1000)
+    }
+    addEvent(event);
+    resetForm();
+  }
+}
+```
+
+
+1. Then it fires **addEvent** function.
+2. It calls **setEvents** function to update the state.
+3. **setEvents** function takes the previous events and spread it in new array and adds the new event in the same array.
+
+**App.js**
+
+```js
+ const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event];
+    });
+  }
+
+<NewEventForm addEvent={addEvent}/>
+```
+ 
+## Close the modal after submitting the form.
+
+- Call **setShowModal()** function and pass false as paramater.
+
+**App.js**
+
+```js
+const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event];
+    });
+    setShowModal(false);
+  }
 ```
