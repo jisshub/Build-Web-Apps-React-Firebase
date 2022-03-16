@@ -1547,7 +1547,7 @@ const resetForm = () => {
 
 # Select Boxes
 
-- Selecting options in UI and updating the` state.
+- Selecting options in UI and updating the state.
 
 **NewEventForm.js**
 
@@ -1614,3 +1614,124 @@ return (
     </div>
   )
 ```
+
+# JSON Server
+
+1. Install JSON server package globally.
+
+```bash
+npm install -g json-server
+```
+
+2. Create a json file and add json data.
+
+```json
+
+```
+
+3. Run the json server file and wraps it with json endpoints to fetch the data.
+
+```bash
+ npx json-server --watch data/db.json
+```
+
+4. Go to resources.
+
+```bash
+http://localhost:3000/trips
+```
+
+# useEffect Hook
+
+**useEffect** is a hook which allows to perform component sideeffect. A sideeffect means code we want to run in relation with the component but not necessarily everytime we reevaluate the component.
+
+1. We use fetch api to fetch from trips endpoint.
+2. Once we have the response, we take the response object and 
+calls the json() on that response object to get access to the json data. It will return a Promise Object
+3. Then we again call then method on promise to get final json data.
+
+```js
+export default function TripList() {
+
+fetch('http://localhost:3000/trips')
+    .then(response => response.json())
+    .then(trips => {
+        console.log(trips)
+    });
+
+}
+```
+4. Store the response data in a state and update the state with new data's.
+
+```js
+export default function TripList() {
+    const [trips, setTrips] = useState([]);
+
+fetch('http://localhost:3000/trips')
+    .then(response => response.json())
+    .then(trips => {
+        setTrips(trips);
+    });
+
+  return (
+    <div>
+      <h1>Trip List</h1>
+    </div>
+  )
+}
+```
+
+# Fetching data with useEffect Hook
+
+useEffect Syntax:
+
+```js
+useEffect(() => {fetch api}, [empty dependency array])
+```
+
+```jsx
+export default function TripList() {
+
+    const [trips, setTrips] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/trips')
+        .then(response => response.json())
+        .then(trips => {
+            setTrips(trips);
+        });
+    }, []);
+    
+    console.log(trips); 
+}
+```
+
+![](./IMAGES/image_16.png)
+
+
+- Using **useEffect** hook we fetch the items.
+- Inject the returned data in UI.
+- We map through each trips using map() method.
+
+```jsx
+return (
+    <div>
+      <h1>Trip List</h1>
+      {
+        trips.map(trip => (
+            <ul className='trip-list'>
+                <li key={trip.id}>
+                    <h3>{trip.title}</h3>
+                    <p>{trip.price}</p>
+                </li>
+            </ul>
+        ))
+      }
+    </div>
+ )
+```
+
+# useEffect Dependency Array
+
+
+
