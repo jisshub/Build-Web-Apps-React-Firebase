@@ -1547,6 +1547,8 @@ const resetForm = () => {
 
 # Select Boxes
 
+- Selecting options in UI and updating the` state.
+
 **NewEventForm.js**
 
 ```js
