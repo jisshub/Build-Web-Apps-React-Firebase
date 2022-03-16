@@ -1,14 +1,17 @@
 import './NewEventForm.css';
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 export default function NewEventForm({addEvent}) {
+
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
+  const [location, setLocation] = useState('');
 
   const resetForm = () => {
     setTitle('');
     setDate('');
+    setLocation('manchester')
   }
 
   const handleSubmit = (e) => {
@@ -16,8 +19,10 @@ export default function NewEventForm({addEvent}) {
     const event = {
       title: title,
       date: date,
+      location: location,
       id: Math.floor(Math.random() * 1000)
     }
+    console.log(event);
     addEvent(event);
     resetForm();
   }
@@ -28,17 +33,25 @@ export default function NewEventForm({addEvent}) {
           <span>Event Title: </span>
           <input 
             type="text" 
-            onChange={(e) => setTitle(e.target.value)}
             value={title}
+            onChange={(e) => setTitle(e.target.value)}
             />
       </label>
       <label>
           <span>Event Date: </span>
           <input 
             type="date" 
-            onChange={(e) => setDate(e.target.value)}
             value={date}
+            onChange={(e) => setDate(e.target.value)}
             />
+      </label>
+      <label>
+        <span>Event Location: </span>
+        <select onChange={(e)=>setLocation(e.target.value)}>
+          <option value="manchester">Manchester</option>
+          <option value="liverpool">Liverpool</option>
+          <option value="cardiff">Cardiff</option>
+        </select>
       </label>
       <button>Submit</button>
     </form>

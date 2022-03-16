@@ -16,6 +16,7 @@ function App() {
     });
     setShowModal(false);
   }
+
   const handleClick = (id) => {
     // filter method returns a new array with the items that match the condition
    setEvents((prevEvents) => {
@@ -46,7 +47,7 @@ function App() {
         
       {showEvents && <EventList events={events} handleClick={handleClick} />}
       <div>
-        <button onClick={()=>setShowModal(true)}>Show Modal</button>
+        <button onClick={()=>setShowModal(true)}>Add New Event</button>
       </div>
       {showModal && (<Modal isShowModal={true}>
         <NewEventForm addEvent={addEvent}/>

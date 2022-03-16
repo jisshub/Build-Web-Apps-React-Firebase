@@ -1487,3 +1487,128 @@ const addEvent = (event) => {
     setShowModal(false);
   }
 ```
+
+# Using the useRef Hook
+
+- Use *useRef* hook to find the values in each inputs.
+- We use this hook instead of state.
+
+**NewEventForm.js**
+
+```js
+const title = useRef();
+const date = useRef();
+```
+
+- Next, use this *ref* to associate with input elements. We add *ref* attribute to input elements.
+
+```jsx
+ <label>
+    <span>Event Title: </span>
+    <input 
+      type="text" 
+      ref={title}
+      />
+</label>
+<label>
+    <span>Event Date: </span>
+    <input 
+      type="date" 
+      ref={date}
+      />
+</label>
+```
+
+- Now we can use this refs as regular dom objects.
+
+- Use the value property of input element in **handleSubmit** function.
+
+```js
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const event = {
+    title: title.current.value,
+    date: date.current.value,
+    id: Math.floor(Math.random() * 1000)
+  }
+  addEvent(event);
+  resetForm();
+}
+```
+
+- Update the **resetForm** function by setting the current values of *title* and *date* to an empty string. 
+
+```js
+const resetForm = () => {
+  title.current.value = '';
+  date.current.value = '';
+}
+```
+
+# Select Boxes
+
+**NewEventForm.js**
+
+```js
+const [location, setLocation] = useState('');
+```
+
+```jsx
+<label>
+  <span>Event Location: </span>
+  <select onChange={}>
+    <option value="manchester">Manchester</option>
+    <option value="liverpool">Liverpool</option>
+    <option value="cardiff">Cardiff</option>
+  </select>
+</label>
+```
+- Here each option have some value and text.
+- If we select one option, I want to update the state *location* with the value of that option. 
+- To do that,
+
+1. We call **setLocation()** when **onChange** handler is fired.
+2. Then we pass event object to get the value of the selected option.
+3. This way we update the location state to be that option value.
+
+- Update **resetForm** and **handleSubmit** function.
+
+```js
+const resetForm = () => {
+  setTitle('');
+  setDate('');
+  setLocation('manchester')
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const event = {
+    title: title,
+    date: date,
+    location: location,
+    id: Math.floor(Math.random() * 1000)
+  }
+  console.log(event);
+  addEvent(event);
+  resetForm();
+}
+```
+
+## Update the UI with location and Date
+
+```jsx
+return (
+    <div>
+        <h1>Event List</h1>
+        {
+            events.map((event, index) => (
+                <div className={styles.card} key={event.id}>
+                  <h2>{index} - {event.title}</h2>
+                  <p>{event.location} - {event.date}</p>
+                  <button onClick={() => handleClick(event.id)}>Delete Event</button> 
+                </div>
+              ))
+        }
+    </div>
+  )
+```
