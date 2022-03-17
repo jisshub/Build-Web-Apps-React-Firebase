@@ -1733,5 +1733,79 @@ return (
 
 # useEffect Dependency Array
 
+- We create new state for url so that we can update the url later in the app.
+- When ever url value changes, we rerun the **useEffect** function. For that, we pass url to dependency array.
+- When the component is first evaluated useEffect will run the function at first.
+- But thereafter for every component reevaluation, if url is changed, then **useEffect** function will run again because url is a **useEffect** dependancy.
+
+
+```js
+  const [url, setUrl] = useState('http://localhost:3000/trips');
+
+    useEffect(() => {
+        fetch(url)
+        .then(response => response.json())
+        .then(trips => {
+            setTrips(trips);
+        });
+    }, [url]);
+```
+
+```jsx
+return (
+    <div className='trip-list'>
+      <h1>Trip List</h1>
+      {
+        trips.map(trip =>  (
+            <ul>
+                <li key={trip.id}>
+                    <h3>{trip.title}</h3>
+                    <p>{trip.price}</p>  
+                </li>
+            </ul>
+                ))
+            }
+            <div className='filter'>
+              <button onClick={() => setUrl('http://localhost:3000/trips?loc=india')}>Indian Trips</button>
+              <button onClick={() => setUrl('http://localhost:3000/trips')}>All Trips</button>
+            </div>
+    </div>
+  )
+```
+
+- Here on clicking first button, we update the **setUrl** function which in turn runs the rerun the **useEffect** function.
+- Clicking on secong button will again run **useEffect** function since url is changed there.
+
+# Using useCallback hook with async await for function dependencies  
+
+- Pass **fetchTrips()** asynchronous function to useEffect() method.
+- **useCallBack** hook creates a casted version of a function.
+- **useCallBack** hook also takes a url as dependancy array.
+- **useCallBack** hook runs in every component reevaluation.
+
+```js
+import { useCallback } from 'react';
+const fetchTrips = useCallback(async() => {
+	const response = await fetch(url);
+	const data = await response.json();
+	setTrips(data);
+	}, [url]
+);
+
+useEffect(() => {
+	fetchTrips();
+	}, [fetchTrips]
+);
+
+```
+
+# Create a Custom Fetch Hook
+
+- Custom hook name starts with keyword *use*.
+- To create a custom hook,
+	1. First create a file named *useFetch.js*.
+	2. Create a function named **useFetch**
+	
+
 
 
