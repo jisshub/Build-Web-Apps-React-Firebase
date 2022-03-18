@@ -66,6 +66,19 @@
 
 [Controlled Inputs and Reseting Forms](#Controlled-Inputs-and-Reseting-Forms)
 
+[Submitting the Forms using onSubmit](#Submitting-the-Forms-using-onSubmit)
+
+[Adding Events to EventList](#Adding-Events-to-EventList)
+
+[Using the useRef Hook](#Using-the-useRef-Hook)
+
+[Select Boxes](#Select-Boxes)
+
+[JSON Server](#JSON-Server)
+
+[useEfect Hook](#useEfect-Hook)
+
+
 
 
 # Using react with cdn
@@ -2074,6 +2087,87 @@ export const useFetch = (url) => {
   }, [url]);
 ```
 
-# useEffect - Infinite Loops
+# React Router Setup
+
+- Install *React Router*.
+
+```bash
+npm install react-router-dom@5.1
+```
+
+- Setup the routes for our components.
+
+- 3 components - Home, About and Contact.
+
+- We wrap the routes inside **Browser Component**.
+
+- We use **Route** component to render the components and set the path to the location.
 
 
+```js
+import './App.css'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <nav>
+          <h1>My Articles</h1>
+        </nav>
+
+        <Route path="/">
+          <Home />
+        </Route>
+        
+        <Route path="/about">
+          <About />  
+        </Route>  
+        
+        <Route path="/contact">
+          <Contact />  
+        </Route>    
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App
+```
+
+# Using switch to match exact components
+
+- Wrap all the routes with **Switch** component.
+ie. only allowing one component to show on the page at a time.
+
+- Use **exact** prop in **Route** component to match the exact path of route. Thus if we have a route like */about* and */about/contact*, only /about will be rendered.
+
+```jsx
+return (
+    <div className="App">
+      <BrowserRouter>
+        <nav>
+          <h1>My Articles</h1>
+        </nav>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          
+          <Route path="/about">
+            <About />  
+          </Route>  
+          
+          <Route path="/contact">
+            <Contact />  
+          </Route>
+        </Switch>    
+      </BrowserRouter>
+    </div>
+  );
+```
+
+# Links & Nav Links
