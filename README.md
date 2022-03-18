@@ -62,6 +62,11 @@
 
 [Forms and Labels in React](#Forms-and-Labels-in-React)
 
+[onChange Event](#onChange-Event)
+
+[Controlled Inputs and Reseting Forms](#Controlled-Inputs-and-Reseting-Forms)
+
+
 
 # Using react with cdn
 
@@ -2022,5 +2027,53 @@ export const useFetch = (url) => {
 ```js
 {error && <p>{error}</p>}
 ```
+
+# Using Clean up Function to Abort Fetch Request
+
+- Clean up function is used in useEffect to abort fetch request.
+- We use abort controller in cleanup function.
+  1. Create an **abort controller** whenever useEffect is called.
+  2. Associate the abort controller with fetch request. For that, we add a **signal** property and set that equal to **controller.signal**. This associates fetch request with **abort controller**.
+  3. Finally we abort the fetch request inside the clean up function.
+  4. This method looks for the fetch request associated with the abort controller and stops them immediately.
+  5. When this happens, fetch request itself throws an error called **AbortError**
+  6. That error is caught in catch block.
+  
+**useFetch.js**
+
+```js
+  useEffect(() => {
+    // create an abort controller on useEffect
+      const controller = new AbortController();
+      const fetchData = async() => {
+          setIsPending(true);
+          try {   
+            // add a **signal** property and set that equal to **controller.signal**.
+              const res = await fetch(url, { signal: controller.signal });
+              if (res.ok == false){
+                  throw new Error(res.statusText);
+              }
+              const json = await res.json();
+              setIsPending(false)
+              setData(json);
+              setError(null);
+          } catch (error) {
+              if (error.name === 'AbortError') {
+                  console.log('Fetch aborted');
+              } else {
+                  setIsPending(false);
+                  setError('Could not fetch the data');
+              }
+          }
+      } 
+      fetchData();
+  
+    // return a clean up function to abort the fetch request.
+      return () => controller.abort();
+
+  }, [url]);
+```
+
+# useEffect - Infinite Loops
 
 
