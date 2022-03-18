@@ -1865,5 +1865,64 @@ export default function TripList() {
 
 ```
 
+# Adding a Loading/Pending State
+
+- Show a loading message while data being fetched.
+
+**useFetch.js**
+
+```js
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] =useState(false);
+
+    useEffect(() => {
+        const fetchData = async() => {
+            setIsPending(true)
+            
+            const res = await fetch(url);
+            const json = await res.json();
+            
+            setIsPending(false)
+            setData(json);
+        } 
+        fetchData();
+    }, [url]);
+    
+    return {data, isPending};
+}
+```
+
+**Summary**
+
+1. We create a state to save the pending and set it to false 
+at start.
+
+2. While fetching data, we pass true to *setIsPending()* function.
+
+3. Once data is retrieved and promise resolved, we pass false to 
+*setIspending()* function.
+
+4. Return isPending as an object.
+
+
+- Next we import isPending state to **TripList** component.
+
+```js
+const {data: trips, isPending} = useFetch(url);
+{isPending && <p>Loading trips...</p>}
+```
+
+- Later check whether *isPending* is true, if yes we display the loading message.
+
+![](./IMAGES/image_17.jpg)
+
+
+# Handling Errors
+
+
+
+
+
 
 
