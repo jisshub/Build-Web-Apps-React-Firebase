@@ -1920,9 +1920,107 @@ const {data: trips, isPending} = useFetch(url);
 
 # Handling Errors
 
+- In case url given is not valid, we have to tackle those errors.
 
 
+**useFetch.js**
 
+```js
+const [error, setError] = useState(null);
 
+useEffect(() => {
+const fetchData = async() => {
+    setIsPending(true);
+    try {    
+        const res = await fetch(url);
+        console.log(res)
+        
+        const json = await res.json();
+        
+        setIsPending(false)
+        setData(json);
+        setError(null);
+    } catch (error) {
+        setIsPending(false);
+        setError('Could not fetch the data');
+        
+        console.log(error.message);
+    }
+} 
+fetchData();
+}, [url]);
+```
+
+- Catch block here only catches the network errors. For instance if we got disconnected from internet, it try block throws an 
+error which is catched in catch block.
+
+- However if we give a url which is not valid, try block dont throws an error, instead get a response. Check screenshot below.
+
+![](./IMAGES/image_18.png)
+
+- Here you can seee status code is 404, Ok property is false, statusTexct is Not Found. So we need to get error message and not response object.
+
+**useFetch.js**
+
+```js
+try {    
+	const res = await fetch(url);
+	if (res.ok == false){
+	    throw new Error(res.statusText);
+	}
+	const json = await res.json();
+
+	setIsPending(false)
+	setData(json);
+	setError(null);
+	} 
+catch (error) {
+	setIsPending(false);
+	setError('Could not fetch the data');
+
+	console.log(error.message);
+}
+```
+
+- So if url is not valid, it throws a response statustext and then moves to catch block and prints the statusText as error message.
+
+- Next return this error as a property thus using it in other components.
+
+```js
+export const useFetch = (url) => {
+    const [data, setData] = useState(null);
+    const [isPending, setIsPending] =useState(false);
+    const [error, setError] = useState(null);   
+
+    useEffect(() => {
+        const fetchData = async() => {
+            setIsPending(true);
+            try {    
+                const res = await fetch(url);
+                if (res.ok == false){
+                    throw new Error(res.statusText);
+                }
+                const json = await res.json();
+                setIsPending(false)
+                setData(json);
+                setError(null);
+            } catch (error) {
+                setIsPending(false);
+                setError('Could not fetch the data');
+                console.log(error.message);
+            }
+        } 
+        fetchData();
+    }, [url]);
+    
+    return {data, isPending, error};
+}
+```
+
+**TripList.js**
+
+```js
+{error && <p>{error}</p>}
+```
 
 
