@@ -2171,3 +2171,226 @@ return (
 ```
 
 # Links & Nav Links
+
+```jsx
+<nav>
+  <h1>My Articles</h1>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+</nav>
+```
+- Here we dont use anchor tag to link to different components, instead we use **Link** component.
+
+- We import **Link** from react-dom.
+
+- **Link Component** will not send another request or it intercept from sending request to the server.
+
+- It will inject the component for the specific routes.
+
+![](./IMAGES/image_22.png)
+
+# NavLink for Navigations
+
+- We can use **NavLink** component instead of **Link** component incase of *navlinks*.
+
+```jsx
+<nav>
+  <h1>My Articles</h1>
+  <NavLink exact to="/">Home</NavLink>
+  <NavLink to="/about">About</NavLink>
+  <NavLink to="/contact">Contact</NavLink>
+</nav>
+```
+
+- It is used when we want to style thr active link while navigation.
+
+- Use *exact* prop to match the exact path. So if we go to About page, that navlink gets the css active class and not the other two links.
+
+```css
+nav a.active {
+  color: white;
+  background: #333;
+  text-decoration: none;
+}
+```
+
+![](./IMAGES/image_23.png)
+
+- U can see About navlink is highlighted on navigated to About Page.
+
+- Use Links or NavLink when navigating to other components with in the app.
+
+# Fetching Data
+
+**useFetch.js**
+
+```js
+import { useState, useEffect } from "react"
+
+export const useFetch = (url) => {
+  const [data, setData] = useState(null)
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    const fetchData = async () => {
+      setIsPending(true)
+      
+      try {
+        const res = await fetch(url, { signal: controller.signal })
+        if(!res.ok) {
+          throw new Error(res.statusText)
+        }
+        const data = await res.json()
+
+        setIsPending(false)
+        setData(data)
+        setError(null)
+      } catch (err) {
+        if (err.name === "AbortError") {
+          console.log("the fetch was aborted")
+        } else {
+          setIsPending(false)
+          setError('Could not fetch the data')
+        }
+      }
+    }
+
+    fetchData()
+
+    return () => {
+      controller.abort()
+    }
+
+  }, [url])
+
+  return { data, isPending, error }
+}
+```
+
+**Home.js**
+
+```js
+import React from 'react'
+import { useFetch } from "../hooks/useFetch";
+import './Home.css';
+
+export default function Home() {
+  const {data: articles, isPending, error} = 
+    useFetch('http://localhost:3000/articles');
+  return (
+    <div className='home'>
+      <h2>Articles</h2>
+      {isPending && <div>Loading...</div>}
+      {error && <div>{error}</div>}
+      {articles && articles.map((article) => (
+        <div key={article.id} className="card">
+          <h3>{article.title}</h3>
+          <p>{article.author}</p>
+        </div>
+      ))}
+    </div>  
+  )}
+```
+
+**Home.css**
+
+```css
+.home .card {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px  solid #e4e4e4;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
+}
+```
+
+![](./IMAGES/image_24.png)
+
+
+# Route Parameters
+
+- Now we listed article on home page, Next we add *Read More* link to each article.
+- When we click on each article, we want to navigate to the article details page.
+- We can use route parameters to get the id of the article.
+
+![](./IMAGES/image_25.png)
+
+## Link Set up in Home Component
+
+**Home.js**
+
+```js
+{articles && articles.map((article) => (
+  <div key={article.id} className="card">
+    <h3>{article.title}</h3>
+    <p>{article.author}</p>
+    <Link to={`/article/${article.id}`}>Read More...</Link>
+  </div>
+))}
+```
+![](./IMAGES/image_27.png)
+
+## Set up the routes and path in App.js
+
+**App.js**
+
+```jsx
+import Article from './pages/Article';
+
+<Route path="/article/:id">
+  <Article />
+</Route>
+```
+- Here, **:** tells react router that route parameter- is changable.
+- Ie. **id** route parameter will change when user clicks on each article.
+- This will leads to article details page.
+
+![](./IMAGES/image_29.png)
+
+
+# The useParams Hook
+
+## Set up the article details page
+
+- Show the article content/body in the details page.
+- We use **useParams** hook for that task.
+- Destructure the id from the route parameters.
+- We can use **useParams** hook to get the id of the article.
+- Set the url with route parameter id.
+- Fetch article from **useFetch**
+- Render article body and contents in details page.
+
+**Article.js**
+
+```js
+export default function Article() {
+    const {id} = useParams();
+    const url = `http://localhost:3000/articles/${id}`;
+    const {data: article, isPending, error} = useFetch(url);
+
+  return (
+    <div>
+        {isPending && <div>Loading...</div>}
+        {error && <div>{error}</div>}
+        {article && (
+            <div>
+                <h2>{article.title}</h2>
+                <p>By {article.author}</p>
+                <p>{article.body}</p>
+            </div>
+        )}
+    </div>
+  )
+}
+```
+
+![](./IMAGES/image_30.png)
+
+# Progammatic Redirects
+
+## Redirect to Home Page When user navigate to article that does not exist.
+
