@@ -76,10 +76,39 @@
 
 [JSON Server](#JSON-Server)
 
-[useEfect Hook](#useEfect-Hook)
+[useEffect Hook](#useEffect-Hook)
 
+[Fetching data with useEffect Hook](#Fetching-data-with-useEffect-Hook)
 
+[useEffect Dependency Array](#useEffect-Dependency-Array)
 
+[Create a Custom Fetch Hook](#Create-a-Custom-Fetch-Hook)
+
+[Adding a Loading/Pending State](#Adding-a-Loading--Pending-State)
+
+[Handling Errors](#Handling-Errors)
+
+[Handling Errors with useEffect](#Handling-Errors-with-useEffect)
+
+[React Router Setup](#React-Router-Setup)
+
+[Using switch to match exact components](#Using-switch-to-match-exact-components)
+
+[Links & Nav Links](#Links-&-Nav-Links)
+
+[NavLink for Navigations](#NavLink-for-Navigations)
+
+[Fetching Data](#Fetching-Data)
+
+[Route Parameters](#Route-Parameters)
+
+[The useParams Hook](#The-useParams-Hook)
+
+[Progammatic Redirects](#Progammatic-Redirects)
+
+[Redirect Component](#Redirect-Component)
+
+[Query Parameters](#Query-Parameters)
 
 # Using react with cdn
 
