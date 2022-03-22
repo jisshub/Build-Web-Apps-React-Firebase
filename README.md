@@ -2394,3 +2394,103 @@ export default function Article() {
 
 ## Redirect to Home Page When user navigate to article that does not exist.
 
+
+![](./IMAGES/image_31.png)
+
+- Here you can see when navigate to an article that dont exist, it shows an error.
+- Instead we need to redirect to Home Page in such case.
+- We use **useEffect** hook.
+- We use **useHistory** hook to redirect to Home Page.
+- Add *error* and *history* object as a dependancy.
+
+**Article.js**
+
+```js
+import {useParams, useHistory} from 'react-router-dom';
+
+const history = useHistory();
+
+useEffect(() => {
+  if (error) {
+    setTimeout(() => {
+      history.push('/');
+    }, 2000)
+  }
+}, [error, history]);
+```
+
+**Above Code Description:**
+
+if we try to fetch that does not exist, it will show an error. Then since error is a dependancy array we re-run the useEffect hook. If error is true, then we set a timeout to redirect to home page after 2 secs of time.
+
+# Redirect Component
+
+- What if we navigate to some route that doesnt exist.
+- In this case we use some kind of **catch route** component.
+- Set route path to **astericks or wildcard(*)**.
+- Here if none of the given routes match, page redirects to home page.
+- We use **Redirect** component for that purpose.
+- Nest **Redirect** component inside Catch Route component.
+- Remember to place this Catch route at the very end of **Switch** Component.
+
+**App.js**
+
+```jsx
+import {Redirect} from 'react-router-dom';
+
+<Route path='*'>
+  <Redirect to="/" />
+</Route>
+```
+
+- Now if we go to http://localhost:3001/diuqweyqiuqw, it will redirect to home page.
+
+# Query Parameters
+
+- We use **useLocation** hook from react-router-dom.
+- **useLocation** hook allows us to get the query string from the url.
+
+  Eg: http://localhost:3001/article?search=react
+
+- Here *?search=react* is the query string.
+
+**Query Parameter/String Syntax**:
+
+  *?key=value*
+
+
+**Contact.js**
+
+```js
+import {useLocation} from 'react-router-dom';
+
+const queryString = useLocation().search;
+console.log(queryString);
+```
+
+![](./IMAGES/image_37.png)
+
+- We get the query string here.
+- Next Pass this query string in a format which can be used in javascript.
+- We can use **URLSearchParams** function for this.
+- Create a new instance of **URLSearchParams** by passing query string as argument.
+- Call get method on the instance to get the single query parameter.
+- We can then render the result on JSX template.
+
+**Contact.js**
+
+```js
+export default function Contact() {
+  const queryString = useLocation().search;
+  const queryParams = new URLSearchParams(queryString);
+  const name = queryParams.get('name');
+  return (
+    <div>
+        <h1>Hey {name}, Contact Me</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure officiis natus eligendi in adipisci culpa fugiat distinctio possimus debitis enim reiciendis harum recusandae quaerat accusantium quas, ex qui nulla consectetur.</p>
+    </div>
+  )
+}
+```
+
+![](./IMAGES/image_36.png)
