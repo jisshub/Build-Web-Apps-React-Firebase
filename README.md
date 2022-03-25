@@ -2601,4 +2601,51 @@ Every action creator returns an action which is a plain js object. That action h
 
 ![](./IMAGES/redux_2.png)
 
+
 # Creating Reducers
+
+- Reducers will be called with in an action which is created by an action creator.
+
+- Reducer will inspect that action and decide whether or not to modify that data based upon this action.
+
+- Every reducer is a function with 2 arguments.
+
+- Reducer Example:
+
+```js
+// Reducer - 1
+const claimHistory = (oldListOfClaims = [], action) => {
+   if(action.type == 'CREATE_CLAIM') {
+     return [...oldListOfClaims, action.payload]
+   }
+  return oldListOfClaims;
+}
+
+
+// Reducer - 2
+const accounting = (bagOfMoney=100, action) => {
+  if(action.type == 'CREATE_CLAIM') {
+    return bagOfMoney - action.payload.amountOfMoneyToCollect;
+  } else if(action.type == 'CREATE_POLICY') {
+    return bagOfMoney + action.payload.amount;
+  }
+  return bagOfMoney;
+}
+
+const policies = (listOfPolicies=[], action) => {
+   if(action.type == 'CREATE_POLICY') {
+     return [...listOfPolicies, action.payload.name];
+   } else if(action.type == 'DELETE_POLICY') {
+     return listOfPolicies.filter(policy => policy !== action.payload.name);
+   }
+  return listOfPoli
+}
+```
+
+- If action type is *CREATE_CLAIM*, then we return a new array with the old list of claims and the action payload object.
+
+- If action type is not *CREATE_CLAIM*, then we return just the old list of claims.
+
+- **listOfPolicies=[]** always define with some default value.
+
+# Testing our Example
