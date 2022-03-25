@@ -2523,3 +2523,82 @@ export default function Contact() {
 ```
 
 ![](./IMAGES/image_36.png)
+
+# Redux
+
+- State management library.
+- Makes creating complex apps easier.
+- Not explicitly designed to work with react.
+
+# Redux Life Cycle in Comparison with Insurance Company
+
+![](./IMAGES/redux_1.png)
+
+### 1. Action Creator and Action
+
+**Action creator** is a function that returns a plain javascript object. We refer to this plain js object as **Action**. An Action has a **Type** property and a **Payload** property.
+**Type** property describes the changes that are going to be made to the data. **Payload** property describes the context of the change we want to make.
+
+### 2. Dispatch
+
+**Dispatch function** takes in that action and makes the copies of that object and pass to different places inside our application.
+
+### 3. Reducers 
+
+**Reducer** is a function that takes in an action and some existing amount of data. Then it process that action and make some change to the data and return it. So that it can be centralized in some other location.
+
+### 4. State 
+
+All the informaiton that we need to keep track of is stored in **State**. So our react application can easily reach in to our redux application.
+
+
+# Modelling with Redux 
+
+[Codepen Editor](https://codepen.io/jisshub/pen/GRyrLZd?editors=0110)
+
+### Creating Action Creators and Actions
+
+```js
+// create an action creator called createPolicy
+const createPolicy = (name, amount) => {
+  // create an action   
+  return {
+    type: 'CREATE_POLICY',
+    payload: {
+      name: name,
+      amount: amount
+    }
+  }
+}
+
+// create an action creator called deletePolicy
+const deletePolicy = (name) => {
+  // create an action
+  return {
+    type: 'DELETE_POLICY',
+    payload: {
+      name: name
+    }
+  }
+}
+
+// create an action creator called createClaim
+const createClaim = (name, amountOfMoneyToCollect) => {
+  // create an action
+   return {
+    type: 'CREATE_CLAIM',
+    payload: {
+      name: name,
+      amountOfMoneyToCollect: amountOfMoneyToCollect 
+    }
+  }
+}
+```
+
+**Summary:**
+
+Every action creator returns an action which is a plain js object. That action has a **Type** property and a **Payload** property.
+
+![](./IMAGES/redux_2.png)
+
+# Creating Reducers
