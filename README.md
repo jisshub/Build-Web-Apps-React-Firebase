@@ -2720,3 +2720,33 @@ console.log(store.getState());
 ```
 
 ![](./IMAGES/redux_5.png)
+
+
+# Redux Cycle
+
+![](./IMAGES/redux_6.png)
+
+### Description:
+
+To change the state of our app, we call an action creator. **Action creator** produces an Action. This action object gets fed to the **dispatch** function which makes copies of the action object and passes it to reducers. Using only **dispatch** function we modify the state. **Reducers** then process that action objects and make some change to the data and return new data. That data gets returned and form new **state object**. We then wait until the state object gets updated and we can see the changes.
+
+
+# React Integration with Redux
+
+Create a new app called **songs**.
+
+![](./IMAGES/redux_7.png)
+
+- Install **react-redux** package.
+
+```bash
+npm i react-redux
+```
+
+## Song App Structure Without Redux
+
+![](./IMAGES/redux_8.png)
+
+## Song App Structure With Redux
+
+![](./IMAGES/redux_9.png)
