@@ -124,7 +124,7 @@
 
 [React Integration with Redux](#React-Integration-with-Redux)
 
-[How React Redux Works ?](#How-React-Redux-Works)
+[How React Redux Works ?](#How-React-Redux-Works-?)
 
 [Redux Project Structure](#Redux-Project-Structure)
 
