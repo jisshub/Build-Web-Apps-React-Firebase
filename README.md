@@ -2750,3 +2750,16 @@ npm i react-redux
 ## Song App Structure With Redux
 
 ![](./IMAGES/redux_9.png)
+
+
+# How React Redux Works ?
+
+![](./IMAGES/redux_10.png)
+
+# Redux Project Structure
+
+![](./IMAGES/redux_11.png)
+
+- Create an *index.js* file inside *src/actions* folder.
+
+If you don't specify the file and only directory while using *import* statements, webpack gives the **index.js** file as default.
