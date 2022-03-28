@@ -2763,3 +2763,105 @@ npm i react-redux
 - Create an *index.js* file inside *src/actions* folder.
 
 If you don't specify the file and only directory while using *import* statements, webpack gives the **index.js** file as default.
+
+
+# Named vs Default Exports
+
+- Create an action creator named **selectSong**
+
+**actions/index.js**
+
+```js
+// action creator
+export const selectSong = (song) => {
+    // return an action
+    return {
+        type: 'SONG_SELECTED',
+        payload: song
+    }
+}
+```
+
+**components/App.js**
+
+```js
+import {selectSong} from '../actions';
+
+```
+
+# Building Reducers
+
+- Create a new file **reducers/index.js**
+- Create a **songsReducer** function.
+- Return the list of songs.
+
+```js
+const songsReducers = () => {
+    return [
+        {title: 'No Scrubs', duration: '4:05'},
+        {title: 'Macarena', duration: '2:30'},
+        {title: 'All Star', duration: '3:15'},
+        {title: 'I Want it That Way', duration: '1:45'}
+    ];
+};
+```
+
+```js
+// another reducer
+const selectedSongReducer = (selectedSong=null, action) => {
+    if (action.type === 'SONG_SELECTED') {
+        return action.payload;
+    }
+
+    return selectedSong;
+}
+```
+- When application starts first, we set selectedSong to null to indicate that no song is selected. Second argument is an action object. If type of action object is *SONG_SELECTED*, then we return the payload of action object.
+- If type of action object is not *SONG_SELECTED*, then we return the *selectedSong*.
+
+
+# Using Providers
+
+- Providers used to wire up the reducers.
+- Import **combineReducers** function from redux.
+- Pass the reducers as an argument to **combineReducers** function.
+- Export the **combineReducers** function.
+- Any file can now access the **combineReducers** function.
+
+```js
+import {combineReducers} from 'redux';
+
+// export the combineReducers function.
+export default combineReducers({
+    songs: songsReducers,
+    selectedSong: selectedSongReducer
+})
+```
+
+## Import packages and reducers in index file
+
+**index.js**
+```js
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducers from './reducers';
+```
+
+- Next create an instance of the **Provider** and wrap it around the App component.
+
+- Pass a single prop to Provider called *store*.
+
+- Inside *store* prop, Call createStore function and pass the reducers as argument to it.
+
+**index.js**
+```js
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={createStore(reducers)}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+```
+
