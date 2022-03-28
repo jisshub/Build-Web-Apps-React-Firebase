@@ -110,6 +110,33 @@
 
 [Query Parameters](#Query-Parameters)
 
+[Redux](#Redux)
+
+[Redux Life Cycle in Comparison with Insurance Company](#Redux-Life-Cycle-in-Comparison-with-Insurance-Company)
+
+[Modelling with Redux](#Modelling-with-Redux)
+
+[Creating Reducers](#Creating-Reducers)
+
+[CombineReducers and CreateStore Function](#CombineReducers-and-CreateStore-Function)
+
+[Redux Cycle](#Redux-Cycle)
+
+[React Integration with Redux](#React-Integration-with-Redux)
+
+[How React Redux Works ?](#How-React-Redux-Works)
+
+[Redux Project Structure](#Redux-Project-Structure)
+
+[Building Action Creator](#Building-Action-Creator)
+
+[Building Reducers](#Building-Reducers)
+
+[Using Providers](#Using-Providers)
+
+[The Connect Function](#The-Connect-Function)
+
+
 # Using react with cdn
 
 [React CDN Links](https://reactjs.org/docs/cdn-links.html)
@@ -2648,7 +2675,7 @@ const policies = (listOfPolicies=[], action) => {
 
 - **listOfPolicies=[]** always define with some default value.
 
-# Testing our Example
+# CombineReducers and CreateStore Function
 
 ### Use combineReducers and createStore functions
 
@@ -2765,7 +2792,7 @@ npm i react-redux
 If you don't specify the file and only directory while using *import* statements, webpack gives the **index.js** file as default.
 
 
-# Named vs Default Exports
+# Building Action Creator
 
 - Create an action creator named **selectSong**
 
@@ -2864,4 +2891,58 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+# The Connect Function
+
+**component/SongList.js**
+
+```js
+export default function SongList() {
+  return (
+    <div>SongList</div>
+  )
+}
+```
+
+- Import **SongList** component from component folder and inject it into the App component.
+```js
+import SongList from './SongList';
+
+return (
+    <div className="App">
+      <h1>App</h1>
+      <SongList />
+    </div>
+  );
+```
+
+## Get list of songs into SongList component.
+
+1. Create instance of **Connect** component.
+
+2. Pass configurations to provider and gets the list of songs.
+
+3. Import **connect** from react redux and create the instance of the **connect** component.
+
+```js
+import { connect } from 'react-redux'
+
+export default function SongList() {
+  return (
+    <div>
+        <h1>Song List</h1>
+    </div>
+  ) 
+}
+
+connect()(SongList);
+```
+
+**Connect Functioin Syntax Description**:
+
+```js
+connect()(SongList) 
+```
+- *connect()* returns a function.
+- *(SongList)* invokes the **SongList** function that got returned.
 
