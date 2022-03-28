@@ -2649,3 +2649,74 @@ const policies = (listOfPolicies=[], action) => {
 - **listOfPolicies=[]** always define with some default value.
 
 # Testing our Example
+
+### Use combineReducers and createStore functions
+
+```js
+const {createStore, combineReducers} = Redux;
+const ourDepartments = combineReducers({
+  // pass different reducers
+  accounting: accounting,
+  claimHistory: claimHistory,
+  policies: policies
+});
+
+// use createStore function and pass in departments
+const store = createStore(ourDepartments)
+// store object represent entire redux application.
+// it contains reference to all reducers and state produced
+// by those reducers.
+
+// call dispatch funciton on store object.
+// to call dispatch we need to pass an action that is created by action creator.
+// So first create action creator and pass action to call dispatch.
+
+const action = createPolicy('Alex', 20);
+console.log(action);
+
+// pass above action to dispatch function.
+console.log(store.dispatch(action));
+
+// pass action to getState function
+console.log(store.getState(action));
+
+// create policies for different users
+store.dispatch(createPolicy('Alex', 40));
+store.dispatch(createPolicy('Jim', 50));
+store.dispatch(createPolicy('Arya', 80));
+
+// getState
+console.log(store.getState());
+```
+
+![](./IMAGES/redux_3.png)
+
+
+### Create Claims for Users
+
+```js
+// create claim of above users
+store.dispatch(createClaim('Alex', 120));
+store.dispatch(createClaim('Jim', 140));
+store.dispatch(createClaim('Arya', 110));
+
+// getState
+console.log(store.getState());
+```
+
+
+![](./IMAGES/redux_4.png)
+
+
+### Delete Policies
+
+```js
+store.dispatch(deletePolicy('Alex'));
+store.dispatch(deletePolicy('Jim'));
+store.dispatch(deletePolicy('Arya'));
+
+// getState
+console.log(store.getState());
+```
+
+![](./IMAGES/redux_5.png)
