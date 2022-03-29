@@ -3005,3 +3005,54 @@ const mapStateToProps = (state) => {
 
 # Building a List with Redux Data
 
+- Create renderList() and map through the songs array.
+- Add JSX template with song title and select button.
+- Invoke renderList() and return the JSX template.
+
+**components/SongList.js**
+```js
+class SongList extends Component {
+  renderList() {
+    return this.props.songs.map((song)=> {
+      return(
+        <div className="item" key={song.title}>
+          <div className="right floated content">
+            <button className="ui button primary">Select</button>
+          </div>
+          <div className="content">{song.title}</div>
+        </div>
+      )
+    });
+  };
+
+  render() {
+    return (
+      <div className='ui divided list'>
+        {this.renderList()}
+      </div>
+    )
+  }
+};
+```
+
+**components/App.js**
+
+```js
+function App() {
+  return (
+    <div className="ui container grip">
+      <div className='ui row'>
+        <div className='column eight wide'>
+          <SongList />
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+- Add semantic ui css to **index.html** to style the list.
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+```
