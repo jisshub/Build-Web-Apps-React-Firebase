@@ -2924,6 +2924,8 @@ return (
 
 3. Import **connect** from react redux and create the instance of the **connect** component.
 
+**components/SongList.js**
+
 ```js
 import { connect } from 'react-redux'
 
@@ -2945,4 +2947,61 @@ connect()(SongList)
 ```
 - *connect()* returns a function.
 - *(SongList)* invokes the **SongList** function that got returned.
+
+
+# Configuring Connect with MapStateToProps
+
+### How to configure connect function and gets some specific data from redux store. ?
+
+**component/SongList.js**
+
+```js
+function SongList() {
+  return (
+    <div>
+        <h1>Song List</h1>
+    </div>
+  ) 
+}
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  console.log('hello');
+  return state;
+}
+
+export default connect(mapStateToProps)(SongList);
+```
+
+- Create a function and return the state.
+- Pass the function as an argument to **connect()** function.
+
+![](./IMAGES/redux_16.png)
+
+- Now we got access to the **state** object.
+- Next we want to get songs array from the state object and inject them to 
+**SongList** component.
+- Call *this.props* in **SongList** component.
+
+**SongList.js**
+```js
+class SongList extends Component {
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        <h1>Song List</h1>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {songs: state.songs};
+}
+```
+
+![](./IMAGES/redux_18.png)
+
+# Building a List with Redux Data
 
