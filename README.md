@@ -136,6 +136,13 @@
 
 [The Connect Function](#The-Connect-Function)
 
+[Configuring Connect with MapStateToProps](#Configuring-Connect-with-MapStateToProps)
+
+[Building a List with Redux Data](#Building-a-List-with-Redux-Data)
+
+[Calling Action Creators from Components](#Calling-Action-Creators-from-Component)
+
+[Functional Component with Connect](#Functional-Component-with-Connect)
 
 # Using react with cdn
 
@@ -3056,3 +3063,94 @@ function App() {
 ```html
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 ```
+
+# Calling Action Creators from Components
+
+- Import the action creator to **SongList** component.
+- Call **onClick** event on the button.
+- Call a function inside **onClick** event and pass song as argument 
+to the **selectSong** action creator.
+
+**components/SongList.js**
+```js
+import { selectSong } from '../actions';
+
+<button 
+  className="ui button primary"
+  onClick={()=>this.props.selectSong(song)}>
+  Select
+</button>
+```
+
+![](./IMAGES/redux_21.png)
+
+- Here you can see initially there is no song selected, so **selectedSong** is null.
+- When a song is selected, **selectedSong** is set to that song.
+
+# Functional Component with Connect
+
+- Creating a song details component.
+
+**components/SongDetail.js**
+```js
+import React from "react";
+import { connect } from "react-redux";
+
+const songDetail = () => {
+    return <div>SongDetail</div>;
+};
+
+export default songDetail;
+```
+
+2. Wrap the song details component in **connect** function. Thus we get some information out of the redux store.
+
+3. To do that, define a **mapStateToProps** function.
+
+4. Return *state.selectedSong* property
+
+**components/SongDetail.js**
+
+```js
+const mapStateToProps = (state) => {
+    return { song: state.selectedSong };
+}
+```
+
+4. Call **connect()** function and pass **mapStateToProps** function as an argument.
+
+```js
+export default connect(mapStateToProps)(songDetail);
+```
+
+5. **SongDetail** function getting a prop object containing currently  selected song.
+
+```js
+const songDetail = (props) => {
+    console.log(props);
+    return <div>SongDetail</div>;
+};
+```
+
+6. Next go to App component, import **SongDetail** component and inject it to **App** component's jsx template.
+
+```jsx
+import SongDetail from './SongDetail';
+
+<div className='column eight wide'>
+  <SongDetail />
+</div>
+```
+
+![](./IMAGES/redux_20.png)
+
+- Here we can see initially song proprty is null, when user clicks Select button, song property is set to the selected song.
+
+- Now we can see the song details since SongDetails component is rendered.
+
+- **SongDetail** component knows what the selected song is.
+
+- Next we render details of selected song in the page.
+
+# Conditional Rendering
+
